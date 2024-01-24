@@ -1,0 +1,87 @@
+<% include header.ejs %>
+
+
+<!-- Include Bootstrap JavaScript CDN just before closing </body> tag or in the <head> -->
+
+
+<div id="toastContainer"></div> <!-- Ensure this element exists in your HTML -->
+
+
+
+
+<div class="form_div">
+    <form method="post" action="/register_form">
+        <h1>Register</h1>
+        <div class="mb-3 down_to_h1_home">
+          <label for="exampleInputEmail1" class="form-label">Name</label>
+          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="name_field">
+          
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Age</label>
+          <input type="text" class="form-control" id="exampleInputPassword1" name="age_field">
+        </div>
+    
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Phone no</label>
+            <input type="text" class="form-control" id="exampleInputPassword2" name="phoneNo_field">
+          </div>
+        <div class="sbtn_div">
+            <button type="submit" class="btn btn-primary sbtn">Submit</button>
+        </div>
+       
+      </form>
+
+      
+
+      <% if (flag) { %>
+        <script>
+          console.log("uu");
+          function showToast(message) {
+            const toastContainer = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.innerHTML = `
+              <div class="toast-header">
+                <strong class="me-auto">Success</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+              </div>
+              <div class="toast-body">
+                ${message}
+              </div>
+            `;
+            toastContainer.appendChild(toast);
+            
+            const bsToast = new bootstrap.Toast(toast, {
+              autohide: true,
+              delay: 500 // hides after 5000ms
+            });
+            bsToast.show();
+            
+            // After the toast is shown, remove it from the DOM after it hides.
+            toast.addEventListener('hidden.bs.toast', function () {
+              toast.remove();
+            });
+          }
+          
+          // Check if the flag is true, and trigger the toast accordingly
+          showToast("User details added successfully.");
+        </script>
+      <% } %>
+      
+      
+    
+</div>
+
+
+    
+    
+
+
+
+
+
+<% include footer.ejs %>
+
+
+
